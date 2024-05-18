@@ -26,15 +26,19 @@ const getCurrentGeoLocation = () => {
 searchBtn.addEventListener("click", async (e) => {
   const value = searchInput.value;
   if (value.trim()) {
-    const res = await searchWeatherData(value);
-    console.log("SEACRH", res);
+    try {
+      const res = await searchWeatherData(value);
+      // console.log("SEACRH", res);
 
-    const humidity = res.current.humidity;
-    const name = res.location.name;
-    const temp = res.current.temp_c;
-    const windSpeed = res.current.wind_kph;
-    const localTime = res.location.localtime;
-    updateDomElements({ humidity, name, temp, windSpeed, localTime });
+      const humidity = res.current.humidity;
+      const name = res.location.name;
+      const temp = res.current.temp_c;
+      const windSpeed = res.current.wind_kph;
+      const localTime = res.location.localtime;
+      updateDomElements({ humidity, name, temp, windSpeed, localTime });
+    } catch (err) {
+      console.log(err);
+    }
   } else {
     alert("Enter a location to seach...");
   }
@@ -71,16 +75,15 @@ const updateDomElements = (data) => {
   windSpeed.innerHTML = `${data.windSpeed} Km/h`;
 
   const hour = new Date(data.localTime).getHours();
-  console.log("HOUR", hour);
 
   if (hour < 4 || hour >= 18) {
-    console.log("Night", cloudImg);
+    // console.log("Night", cloudImg);
     container.style.background = "rgb(35,36,0)";
     container.style.background =
       "linear-gradient(153deg, rgba(35,36,0,1) 0%, rgba(0,2,14,1) 0%, rgba(0,20,46,1) 46%, rgba(0,212,255,1) 99%)";
     cloudImg.src = "./assests/moon.png";
   } else if (hour >= 4 || hour < 18) {
-    console.log("DAY", cloudImg);
+    // console.log("DAY", cloudImg);
     container.style.background = "rgb(35,36,0)";
     container.style.background =
       "linear-gradient(140deg, rgba(35,36,0,1) 0%, rgba(248,255,207,20) 0%, rgba(0,212,255,1) 99%)";
