@@ -7,13 +7,13 @@ p {
 }
 
 #container {
-  background: rgb(2, 0, 36);
+  /* background: rgb(2, 0, 36);
   background: linear-gradient(
     326deg,
     rgba(2, 0, 36, 1) 1%,
     rgba(18, 153, 140, 1) 49%,
     rgba(0, 212, 255, 1) 100%
-  );
+  ); */
   width: 300px;
   border: none;
   padding: 20px;
@@ -74,6 +74,8 @@ p {
 
 #main-div > img {
   margin-bottom: 14px;
+  width: 150px;
+  height: 150px;
 }
 
 #extras-div {
