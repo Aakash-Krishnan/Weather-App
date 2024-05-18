@@ -1,0 +1,104 @@
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+p {
+  padding: 0;
+  margin: 0;
+}
+
+#container {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    326deg,
+    rgba(2, 0, 36, 1) 1%,
+    rgba(18, 153, 140, 1) 49%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  width: 300px;
+  border: none;
+  padding: 20px;
+  border-radius: 40px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(7, 116, 72, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+#search-div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-self: center;
+}
+
+#search-input {
+  padding: 10px;
+  font-size: 16px;
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  width: 230px;
+}
+
+#search-btn {
+  background-color: rgb(255, 255, 255);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+#search-btn > img {
+  width: 20px;
+  height: 20px;
+}
+
+#search-btn:hover {
+  background-color: rgb(18, 83, 98);
+  color: white;
+}
+
+#main-div {
+  margin: 20px 0px;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 2px;
+}
+
+#main-div > img {
+  margin-bottom: 14px;
+}
+
+#extras-div {
+  color: white;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-around;
+}
+
+.extras {
+  margin-top: 20px;
+  display: flex;
+  gap: 8px;
+}
+
+.extras img {
+  color: white;
+}
+
+#humidity,
+#wind-speed {
+  padding: 0;
+  margin: 0;
+  font-weight: bold;
+}

@@ -1,3 +1,8 @@
+const celsius = document.getElementById("celsius");
+const region = document.getElementById("region");
+const humidity = document.getElementById("humidity");
+const windSpeed = document.getElementById("wind-speed");
+
 const getCurrentGeoLocation = () => {
   return new Promise((resolve, reject) => {
     window.navigator.geolocation.getCurrentPosition(
@@ -27,6 +32,10 @@ const getLocationDetails = async ({ lat, long }) => {
 
 const updateDomElements = (data) => {
   console.log(data);
+  celsius.innerHTML = `${data.temp}&degC`;
+  region.innerText = data.name;
+  humidity.innerHTML = `${data.humidity}%`;
+  windSpeed.innerHTML = `${data.windSpeed} Km/h`;
 };
 
 window.addEventListener("load", (e) => {

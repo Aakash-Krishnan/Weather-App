@@ -10,42 +10,57 @@
     <h1>Weather App</h1>
     <div id="container">
       <div id="search-div">
-        <input type="text" placeholder="Search" id="search" />
-        <button id="search-btn">find</button>
+        <input type="text" placeholder="Search" id="search-input" />
+        <button id="search-btn">
+          <img src="./assests/search.png" />
+        </button>
       </div>
 
       <div id="main-div">
-        <img id="cloud-img" src="" alt="" />
-        <p id="celcius"></p>
-        <p id="region"></p>
+        <img
+          id="cloud-img"
+          id="wind-speed-img"
+          src="./assests/sun.png"
+          alt=""
+          width="150"
+          height="150"
+        />
+        <p id="celsius">22*C</p>
+        <p id="region">Tamil Nadu</p>
       </div>
 
       <div id="extras-div">
-        <!-- <div class="separator"> -->
-        <div id="humidity-div">
+        <div class="extras" id="humidity-div">
           <div>
-            <img id="humidity-img" src="" alt="" />
-            <div></div>
+            <img
+              id="humidity-img"
+              src="./assests/humidity.png"
+              alt=""
+              width="30px"
+            />
           </div>
 
           <div>
             <p id="humidity"></p>
             <p>Humidity</p>
           </div>
-        </div>  
+        </div>
 
-        <div id="wind-speed-div">
+        <div class="extras" id="wind-speed-div">
           <div>
-            <img id="wind-speed-img" src="" alt="" />
-            <div></div>
+            <img
+              id="wind-speed-img"
+              src="./assests/wind-speed.png"
+              alt=""
+              width="30px"
+            />
           </div>
 
           <div>
-            <p id="humidity"></p>
+            <p id="wind-speed">18 Km/h</p>
             <p>Wind Speed</p>
           </div>
         </div>
-        <!-- </div> -->
       </div>
     </div>
     <script src="weather.js"></script>
