@@ -78,6 +78,7 @@ const updateDomElements = (data) => {
     container.style.background =
       "linear-gradient(153deg, rgba(35,36,0,1) 0%, rgba(0,2,14,1) 0%, rgba(0,20,46,1) 46%, rgba(0,212,255,1) 99%)";
     cloudImg.src = "./assests/moon.png";
+    country.style.color = "rgb(144, 220, 245)";
   } else if (hour >= 4 || hour < 18) {
     // console.log("DAY", cloudImg);
     container.style.background = "rgb(35,36,0)";
