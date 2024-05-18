@@ -1,13 +1,18 @@
+const container = document.getElementById("container");
+
 const celsius = document.getElementById("celsius");
 const region = document.getElementById("region");
 const humidity = document.getElementById("humidity");
 const windSpeed = document.getElementById("wind-speed");
 const cloudImg = document.getElementById("cloud-img");
 const country = document.getElementById("country");
-const container = document.getElementById("container");
 
 const searchBtn = document.getElementById("search-btn");
 const searchInput = document.getElementById("search-input");
+
+document.addEventListener("keydown", (e) => {
+  if (e.ctrlKey && e.key === "i") searchInput.focus();
+});
 
 const getCurrentGeoLocation = () => {
   return new Promise((resolve, reject) => {
@@ -24,19 +29,14 @@ const getCurrentGeoLocation = () => {
   });
 };
 
-searchBtn.addEventListener("click", async () => {
-  const value = searchInput.value;
-  if (value.trim()) {
-    try {
-      const res = await searchWeatherData(value);
-      // console.log("SEACRH", res);
-      revieveDataAndUpdateDom(res);
-    } catch (err) {
-      console.log(err);
-    }
-  } else {
-    alert("Enter a location to seach...");
+searchInput.addEventListener("keyup", (e) => {
+  if (e.key === "Enter") {
+    getLocationDatas();
   }
+});
+
+searchBtn.addEventListener("click", () => {
+  getLocationDatas();
 });
 
 const getWeatherLocationDetails = async ({ lat, long }) => {
@@ -63,6 +63,22 @@ const searchWeatherData = async (search) => {
   }
 };
 
+const getLocationDatas = async (e) => {
+  const value = searchInput.value;
+  if (value.trim()) {
+    try {
+      const res = await searchWeatherData(value);
+      revieveDataAndUpdateDom(res);
+      searchInput.value = "";
+    } catch (err) {
+      alert("Can't find the location");
+      console.log(err);
+    }
+  } else {
+    alert("Enter a location to seach...");
+  }
+};
+
 const updateDomElements = (data) => {
   celsius.innerHTML = `${data.temp}&degC`;
   region.innerText = data.name;
@@ -85,6 +101,7 @@ const updateDomElements = (data) => {
     container.style.background =
       "linear-gradient(140deg, rgba(35,36,0,1) 0%, rgba(248,255,207,20) 0%, rgba(0,212,255,1) 99%)";
     cloudImg.src = "./assests/sun.png";
+    country.style.color = "rgb(5, 62, 79)";
   }
 };
 
