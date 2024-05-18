@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Weather App</h1>
+    <div id="container">
+      <div id="search-div">
+        <input type="text" placeholder="Search" id="search" />
+        <button id="search-btn">find</button>
+      </div>
+
+      <div id="main-div">
+        <img id="cloud-img" src="" alt="" />
+        <p id="celcius"></p>
+        <p id="region"></p>
+      </div>
+
+      <div id="extras-div">
+        <!-- <div class="separator"> -->
+        <div id="humidity-div">
+          <div>
+            <img id="humidity-img" src="" alt="" />
+            <div></div>
+          </div>
+
+          <div>
+            <p id="humidity"></p>
+            <p>Humidity</p>
+          </div>
+        </div>  
+
+        <div id="wind-speed-div">
+          <div>
+            <img id="wind-speed-img" src="" alt="" />
+            <div></div>
+          </div>
+
+          <div>
+            <p id="humidity"></p>
+            <p>Wind Speed</p>
+          </div>
+        </div>
+        <!-- </div> -->
+      </div>
+    </div>
+    <script src="weather.js"></script>
+  </body>
+</html>
