@@ -3,6 +3,7 @@ const region = document.getElementById("region");
 const humidity = document.getElementById("humidity");
 const windSpeed = document.getElementById("wind-speed");
 const cloudImg = document.getElementById("cloud-img");
+const country = document.getElementById("country");
 const container = document.getElementById("container");
 
 const searchBtn = document.getElementById("search-btn");
@@ -23,19 +24,13 @@ const getCurrentGeoLocation = () => {
   });
 };
 
-searchBtn.addEventListener("click", async (e) => {
+searchBtn.addEventListener("click", async () => {
   const value = searchInput.value;
   if (value.trim()) {
     try {
       const res = await searchWeatherData(value);
       // console.log("SEACRH", res);
-
-      const humidity = res.current.humidity;
-      const name = res.location.name;
-      const temp = res.current.temp_c;
-      const windSpeed = res.current.wind_kph;
-      const localTime = res.location.localtime;
-      updateDomElements({ humidity, name, temp, windSpeed, localTime });
+      revieveDataAndUpdateDom(res);
     } catch (err) {
       console.log(err);
     }
@@ -73,6 +68,7 @@ const updateDomElements = (data) => {
   region.innerText = data.name;
   humidity.innerHTML = `${data.humidity}%`;
   windSpeed.innerHTML = `${data.windSpeed} Km/h`;
+  country.innerText = data.country;
 
   const hour = new Date(data.localTime).getHours();
 
@@ -94,13 +90,17 @@ const updateDomElements = (data) => {
 window.addEventListener("load", (e) => {
   getCurrentGeoLocation()
     .then(getWeatherLocationDetails)
-    .then((res) => {
-      const humidity = res.current.humidity;
-      const name = res.location.name;
-      const temp = res.current.temp_c;
-      const windSpeed = res.current.wind_kph;
-      const localTime = res.location.localtime;
-      updateDomElements({ humidity, name, temp, windSpeed, localTime });
-    })
+    .then(revieveDataAndUpdateDom)
     .catch((err) => console.log("err", err));
 });
+
+const revieveDataAndUpdateDom = (res) => {
+  console.log(res);
+  const humidity = res.current.humidity;
+  const name = res.location.name;
+  const temp = res.current.temp_c;
+  const windSpeed = res.current.wind_kph;
+  const localTime = res.location.localtime;
+  const country = res.location.country;
+  updateDomElements({ humidity, name, temp, windSpeed, localTime, country });
+};
