@@ -17,6 +17,7 @@ const cardStyle = {
 const WeatherCard = (prop) => {
   const { setHourStyle } = prop;
 
+  const [searchInput, setSearchInput] = useState("");
   const [search, setSearch] = useState("");
   const [spinner, setSpinner] = useState(true);
   const [locationDetails, setLocationDetails] = useState({});
@@ -25,9 +26,10 @@ const WeatherCard = (prop) => {
 
   const searchRef = useRef(null);
 
-  const onSearchHandler = useCallback((value) => {
-    setSearch(value);
-  }, []);
+  const onSearchHandler = useCallback(() => {
+    setSearch(searchInput);
+    setSearchInput("");
+  }, [searchInput]);
 
   useEffect(() => {
     searchRef.current?.focus();
@@ -42,7 +44,7 @@ const WeatherCard = (prop) => {
       setTime(hour);
       setHourStyle("night");
     }
-  }, [locationDetails.location, setHourStyle]);
+  }, [locationDetails?.location, setHourStyle]);
 
   useEffect(() => {
     setSpinner(true);
@@ -80,6 +82,10 @@ const WeatherCard = (prop) => {
               >
                 <Search
                   allowClear
+                  value={searchInput}
+                  onChange={(e) => {
+                    setSearchInput(e.target.value);
+                  }}
                   ref={searchRef}
                   placeholder="Eg: India"
                   onSearch={onSearchHandler}
