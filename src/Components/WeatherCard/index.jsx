@@ -28,6 +28,10 @@ const WeatherCard = (prop) => {
 
   const searchRef = useRef(null);
 
+  const handleSearch = useCallback((e) => {
+    setSearchInput(e.target.value);
+  }, []);
+
   const onSearchHandler = useCallback(() => {
     setSearchLocation(searchInput);
     setSearchInput("");
@@ -79,9 +83,7 @@ const WeatherCard = (prop) => {
                 <Search
                   allowClear
                   value={searchInput}
-                  onChange={(e) => {
-                    setSearchInput(e.target.value);
-                  }}
+                  onChange={handleSearch}
                   ref={searchRef}
                   placeholder="Eg: India"
                   onSearch={onSearchHandler}
