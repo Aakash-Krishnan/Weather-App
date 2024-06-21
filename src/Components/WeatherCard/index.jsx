@@ -5,7 +5,7 @@ import { Card, Flex, Input, Spin, Col, Row } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
 import ErrorComponent from "../ErrorComponent";
-import CardDetails from "../CardDetails";
+import CardDetails from "../WeatherDetails";
 
 import { getLocationDetails } from "../../utils/getLocationDetails";
 import { getHour } from "../../utils/getHour";
