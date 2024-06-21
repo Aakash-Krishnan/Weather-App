@@ -3,16 +3,13 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { Card, Flex, Input, Spin, Col, Row } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
-import { getLocationDetails } from "../../utils/getLocationDetails";
 import ErrorComponent from "../ErrorComponent";
-
 import CardDetails from "../CardDetails";
 
-const { Search } = Input;
+import { getLocationDetails } from "../../utils/getLocationDetails";
+import { getHour } from "../../utils/useHour";
 
-const cardStyle = {
-  minWidth: 520,
-};
+const { Search } = Input;
 
 const WeatherCard = (prop) => {
   const { setHourStyle } = prop;
@@ -34,27 +31,27 @@ const WeatherCard = (prop) => {
   useEffect(() => {
     searchRef.current?.focus();
 
-    const localTime = locationDetails.location?.localtime;
-    const hour = new Date(localTime).getHours();
+    const [hour, type] = getHour(locationDetails);
+    setTime(hour);
+    setHourStyle(type);
 
-    if (hour < 4 || hour >= 18) {
-      setTime(hour);
-      setHourStyle("day");
-    } else if (hour >= 4 || hour < 18) {
-      setTime(hour);
-      setHourStyle("night");
-    }
-  }, [locationDetails?.location, setHourStyle]);
+    return () => {};
+  }, [locationDetails, setHourStyle]);
 
   useEffect(() => {
     setSpinner(true);
 
-    getLocationDetails(searchLocation)
-      .then((res) => {
+    (async () => {
+      try {
+        const res = await getLocationDetails(searchLocation);
         setLocationDetails(res);
         setSpinner(false);
-      })
-      .catch((err) => setLocationError(err));
+      } catch (err) {
+        setLocationError(err);
+      }
+    })();
+
+    return () => {};
   }, [searchLocation]);
 
   return (
@@ -63,7 +60,7 @@ const WeatherCard = (prop) => {
         <Col>
           <Card
             hoverable
-            style={cardStyle}
+            style={{ minWidth: 520 }}
             styles={{
               body: {
                 padding: 0,
