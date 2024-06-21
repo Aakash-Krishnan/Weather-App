@@ -1,0 +1,31 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  font-family: "Playwrite NZ", cursive;
+}
+
+.day {
+  background: linear-gradient(
+    153deg,
+    rgba(35, 36, 0, 1) 0%,
+    rgba(0, 2, 14, 1) 0%,
+    rgba(0, 20, 46, 1) 46%,
+    rgba(0, 212, 255, 1) 99%
+  );
+  color: rgb(144, 220, 245);
+}
+
+.night {
+  background: linear-gradient(
+    163deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(21, 149, 198, 1) 52%,
+    rgba(255, 153, 0, 1) 91%
+  );
+
+  color: rgb(5, 62, 79);
+}
+
+.title {
+  color: white !important;
+}

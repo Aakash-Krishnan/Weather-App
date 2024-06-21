@@ -2,61 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./public/assets/weather.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playwrite+NZ:wght@100..400&display=swap"
+      rel="stylesheet"
+    />
     <title>Weather App</title>
-    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Weather App</h1>
-    <div id="container">
-      <div id="search-div">
-        <input type="text" placeholder="Search" id="search-input" />
-        <button id="search-btn">
-          <img src="./assests/search.png" />
-        </button>
-      </div>
-
-      <div id="main-div">
-        <img id="cloud-img" />
-        <p id="celsius"></p>
-        <p id="region"></p>
-        <p id="country"></p>
-      </div>
-
-      <div id="extras-div">
-        <div class="extras" id="humidity-div">
-          <div>
-            <img
-              id="humidity-img"
-              src="./assests/humidity.png"
-              alt=""
-              width="30px"
-            />
-          </div>
-
-          <div>
-            <p id="humidity"></p>
-            <p>Humidity</p>
-          </div>
-        </div>
-
-        <div class="extras" id="wind-speed-div">
-          <div>
-            <img
-              id="wind-speed-img"
-              src="./assests/wind-speed.png"
-              alt=""
-              width="30px"
-            />
-          </div>
-
-          <div>
-            <p id="wind-speed"></p>
-            <p>Wind Speed</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script src="weather.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
