@@ -83,6 +83,7 @@ const WeatherCard = (prop) => {
                   ref={searchRef}
                   placeholder="Eg: India"
                   onSearch={onSearchHandler}
+                  disabled={spinner}
                   enterButton
                 />
 
