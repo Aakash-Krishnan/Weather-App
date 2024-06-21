@@ -17,9 +17,9 @@ const cardStyle = {
 const WeatherCard = (prop) => {
   const { setHourStyle } = prop;
 
-  const [searchInput, setSearchInput] = useState("");
-  const [search, setSearch] = useState("");
   const [spinner, setSpinner] = useState(true);
+  const [searchInput, setSearchInput] = useState("");
+  const [searchLocation, setSearchLocation] = useState("");
   const [locationDetails, setLocationDetails] = useState({});
   const [locationError, setLocationError] = useState({});
   const [time, setTime] = useState(0);
@@ -27,7 +27,7 @@ const WeatherCard = (prop) => {
   const searchRef = useRef(null);
 
   const onSearchHandler = useCallback(() => {
-    setSearch(searchInput);
+    setSearchLocation(searchInput);
     setSearchInput("");
   }, [searchInput]);
 
@@ -49,13 +49,13 @@ const WeatherCard = (prop) => {
   useEffect(() => {
     setSpinner(true);
 
-    getLocationDetails(search)
+    getLocationDetails(searchLocation)
       .then((res) => {
         setLocationDetails(res);
         setSpinner(false);
       })
       .catch((err) => setLocationError(err));
-  }, [search]);
+  }, [searchLocation]);
 
   return (
     <>
