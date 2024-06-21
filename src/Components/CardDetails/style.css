@@ -1,4 +1,18 @@
+.country-div {
+  margin: 10px 30px 0px 0px;
+}
+
+.country {
+  margin-bottom: 0px !important;
+}
+
+.in {
+  position: relative !important;
+  top: 4px;
+}
+
 .icon {
+  display: inline;
   width: 44px;
   height: 44px;
 }

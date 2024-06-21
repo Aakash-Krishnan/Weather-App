@@ -19,7 +19,6 @@ export function locationReducer(state, action) {
         locationError: action.payload,
       };
     default:
-      console.log("STATE REDUCER", state);
       return state;
   }
 }

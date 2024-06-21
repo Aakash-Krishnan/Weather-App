@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useRef, useReducer } from "react";
+import "./style.css";
 
 import { Card, Flex, Input, Spin, Col, Row } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -64,7 +65,7 @@ const WeatherCard = (prop) => {
         <Col>
           <Card
             hoverable
-            style={{ minWidth: 520 }}
+            className="card"
             styles={{
               body: {
                 padding: 0,
@@ -74,13 +75,7 @@ const WeatherCard = (prop) => {
             }}
           >
             <Flex>
-              <Flex
-                vertical
-                style={{
-                  padding: 32,
-                  width: "100%",
-                }}
-              >
+              <Flex className="card-details-container" vertical>
                 <Search
                   allowClear
                   value={searchInput}
@@ -100,9 +95,7 @@ const WeatherCard = (prop) => {
                   </>
                 ) : state.spinner ? (
                   <Spin
-                    style={{
-                      margin: "60px",
-                    }}
+                    className="spin"
                     indicator={<LoadingOutlined spin />}
                     size="large"
                   />

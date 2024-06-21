@@ -1,0 +1,12 @@
+.card {
+  min-width: 520px;
+}
+
+.card-details-container {
+  padding: 32px;
+  width: 100%;
+}
+
+.spin {
+  margin: 60px;
+}

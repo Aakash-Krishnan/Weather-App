@@ -1,9 +1,9 @@
 import { useState } from "react";
+import "./App.css";
 
 import WeatherCard from "./Components/WeatherCard";
 
 import { Col, Flex, Typography } from "antd";
-import "./App.css";
 
 function App() {
   const [hourStyle, setHourStyle] = useState("day");
