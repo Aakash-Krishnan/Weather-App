@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef, useReducer } from "react";
 
 import { Card, Flex, Input, Spin, Col, Row } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -7,25 +7,27 @@ import ErrorComponent from "../ErrorComponent";
 import CardDetails from "../CardDetails";
 
 import { getLocationDetails } from "../../utils/getLocationDetails";
-import { getHour } from "../../utils/useHour";
+import { getHour } from "../../utils/getHour";
+import { locationReducer } from "./locationReducer";
 
 const { Search } = Input;
 
 const WeatherCard = (prop) => {
   const { setHourStyle } = prop;
 
-  const [spinner, setSpinner] = useState(true);
+  const [state, dispatch] = useReducer(locationReducer, {
+    spinner: true,
+    locationDetails: {},
+    locationError: {},
+  });
+
   const [searchInput, setSearchInput] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
-  const [locationDetails, setLocationDetails] = useState({});
-  const [locationError, setLocationError] = useState({});
   const [time, setTime] = useState(0);
 
   const searchRef = useRef(null);
 
   const onSearchHandler = useCallback(() => {
-    setLocationError("");
-
     setSearchLocation(searchInput);
     setSearchInput("");
   }, [searchInput]);
@@ -33,25 +35,24 @@ const WeatherCard = (prop) => {
   useEffect(() => {
     searchRef.current?.focus();
 
-    const [hour, type] = getHour(locationDetails);
+    const [hour, type] = getHour(state.locationDetails);
     setTime(hour);
-    setHourStyle(type);
+    setHourStyle((prev) => (type ? type : prev));
 
     // return () => {};
-  }, [locationDetails, setHourStyle, locationError]);
+  }, [state.locationDetails, setHourStyle, state.locationError]);
 
   useEffect(() => {
-    setSpinner(true);
+    dispatch({ type: "LOADING" });
 
     (async () => {
       try {
         const res = await getLocationDetails(searchLocation);
         if (res?.error) throw new Error(res.error.message);
-        setLocationDetails(res);
+        dispatch({ type: "SUCCESS", payload: res });
       } catch (err) {
-        setLocationError(err);
+        dispatch({ type: "ERROR", payload: err });
       }
-      setSpinner(false);
     })();
 
     // return () => {};
@@ -89,15 +90,15 @@ const WeatherCard = (prop) => {
                   ref={searchRef}
                   placeholder="Eg: India"
                   onSearch={onSearchHandler}
-                  disabled={spinner}
+                  disabled={state.spinner}
                   enterButton
                 />
 
-                {locationError.message ? (
+                {state.locationError.message ? (
                   <>
                     <ErrorComponent />
                   </>
-                ) : spinner ? (
+                ) : state.spinner ? (
                   <Spin
                     style={{
                       margin: "60px",
@@ -106,7 +107,10 @@ const WeatherCard = (prop) => {
                     size="large"
                   />
                 ) : (
-                  <CardDetails locationDetails={locationDetails} time={time} />
+                  <CardDetails
+                    locationDetails={state.locationDetails}
+                    time={time}
+                  />
                 )}
               </Flex>
             </Flex>
