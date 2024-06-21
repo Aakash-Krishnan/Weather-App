@@ -24,6 +24,8 @@ const WeatherCard = (prop) => {
   const searchRef = useRef(null);
 
   const onSearchHandler = useCallback(() => {
+    setLocationError("");
+
     setSearchLocation(searchInput);
     setSearchInput("");
   }, [searchInput]);
@@ -35,8 +37,8 @@ const WeatherCard = (prop) => {
     setTime(hour);
     setHourStyle(type);
 
-    return () => {};
-  }, [locationDetails, setHourStyle]);
+    // return () => {};
+  }, [locationDetails, setHourStyle, locationError]);
 
   useEffect(() => {
     setSpinner(true);
@@ -44,14 +46,15 @@ const WeatherCard = (prop) => {
     (async () => {
       try {
         const res = await getLocationDetails(searchLocation);
+        if (res?.error) throw new Error(res.error.message);
         setLocationDetails(res);
-        setSpinner(false);
       } catch (err) {
         setLocationError(err);
       }
+      setSpinner(false);
     })();
 
-    return () => {};
+    // return () => {};
   }, [searchLocation]);
 
   return (

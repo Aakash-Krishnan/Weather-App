@@ -4,7 +4,7 @@ const ErrorComponent = () => {
   return (
     <Flex justify="center" align="center" style={{ margin: "50px" }}>
       <Flex>
-        <Typography.Title>Wrong location :(</Typography.Title>
+        <Typography.Title>No match on this location :(</Typography.Title>
       </Flex>
     </Flex>
   );
