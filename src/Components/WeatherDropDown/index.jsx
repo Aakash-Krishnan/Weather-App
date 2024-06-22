@@ -1,9 +1,11 @@
 import { useEffect, useReducer, useState } from "react";
+import "./dropDown.css";
 
 import { getLocation } from "../../utils/getLocationDetails";
 import { locationReducer } from "../../utils/locationReducer";
+import { getHour } from "../../utils/getHour";
 
-import { Collapse, Flex } from "antd";
+import { Collapse, Flex, Spin } from "antd";
 
 const WeatherDropDown = (props) => {
   const { location } = props;
@@ -17,48 +19,98 @@ const WeatherDropDown = (props) => {
 
   const [item, setItem] = useState([]);
 
+  const loadingSpinner = [
+    { key: "1", label: "Loading...", children: <Spin /> },
+  ];
+
   useEffect(() => {
-    dispatch({ type: "LOADING" });
+    const makeApiCall = () => {
+      dispatch({ type: "LOADING" });
+      getLocation(dispatch, area);
+    };
 
-    getLocation(dispatch, area);
+    makeApiCall();
 
-    // return () => {};
+    const intervalId = setInterval(() => {
+      console.log("Updating the your weather detail.");
+      makeApiCall();
+    }, 1_800_000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, [area]);
 
   useEffect(() => {
     if (state.locationDetails?.location?.name && item.length === 0) {
+      const [hour] = getHour(state.locationDetails);
+
       const data = {
         key: id,
         label: (
-          <Flex>
+          <Flex align="center" justify="space-between" gap={"10px"}>
             <Flex align="center">
               <img
+                className="h-icon"
                 alt="avatar"
                 src={state.locationDetails.current.condition.icon}
               />
               <h4>{state.locationDetails.location.country}</h4>
             </Flex>
 
-            <p>{}</p>
+            <p className="w-time">
+              {hour % 12} {hour > 12 ? "PM" : "AM"}
+            </p>
           </Flex>
         ),
-        children: <p>Hi</p>,
+        children: (
+          <Flex gap={24} className="w-detail" align="center">
+            <Flex gap="small" align="center">
+              <img
+                className="w-icon"
+                src="assets/humidity.png"
+                alt="humidity"
+              />
+              <p>
+                {state.locationDetails.current.humidity} g/m<sup>3</sup>
+              </p>
+            </Flex>
+
+            <Flex gap="small">
+              <p className="w-temp">
+                {state.locationDetails.current.temp_c}&deg;C
+              </p>
+            </Flex>
+
+            <Flex gap="middle" align="center">
+              <img
+                className="w-icon"
+                src="assets/wind-speed.png"
+                alt="wind-speed"
+              />
+              <p>{state.locationDetails.current.wind_kph} Km/hr</p>
+            </Flex>
+          </Flex>
+        ),
       };
       setItem((prev) => [...prev, data]);
     }
 
     // return () => {};
-  }, [id, item, item.length, state.locationDetails?.location?.name]);
+  }, [
+    id,
+    item.length,
+    state.locationDetails,
+    state.locationDetails.location?.name,
+  ]);
 
   return (
     <div>
-      {item && (
-        <Collapse
-          style={{ backgroundColor: "white" }}
-          items={item}
-          defaultActiveKey={["1"]}
-        />
-      )}
+      <Collapse
+        style={{ backgroundColor: "white", width: "300px" }}
+        items={!item.length ? loadingSpinner : item}
+        defaultActiveKey={["1"]}
+      />
     </div>
   );
 };

@@ -12,7 +12,7 @@ const getActiveColors = (colors) =>
   colors.map((color) => new TinyColor(color).darken(5).toString());
 
 const AddButton = (props) => {
-  const { locationDetails } = props;
+  const { locationDetails, isLoading } = props;
   const { weatherCollection, setWeatherCollection } = useWeatherCollection();
 
   const handleClick = () => {
@@ -44,7 +44,9 @@ const AddButton = (props) => {
         <Button
           type="primary"
           size="medium"
-          disabled={Object.keys(locationDetails).length ? false : true}
+          disabled={
+            !isLoading && Object.keys(locationDetails).length ? false : true
+          }
           onClick={handleClick}
         >
           Add

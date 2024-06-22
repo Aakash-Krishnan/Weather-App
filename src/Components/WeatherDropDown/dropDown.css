@@ -1,0 +1,28 @@
+.ant-collapse-expand-icon {
+  position: relative;
+  top: 4px;
+}
+
+.h-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.w-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.w-detail {
+  font-size: 10px;
+  margin-top: 0px;
+}
+
+.w-temp {
+  margin-top: 0px;
+}
+
+.w-time {
+  font-size: 12px;
+  width: 50px;
+}

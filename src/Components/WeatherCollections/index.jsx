@@ -3,7 +3,6 @@ import WeatherDropDown from "../WeatherDropDown";
 
 const WeatherCollections = () => {
   const { weatherCollection } = useWeatherCollection();
-
   return (
     <>
       {weatherCollection &&

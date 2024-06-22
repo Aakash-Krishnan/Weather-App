@@ -18,7 +18,7 @@ const WeatherCard = (prop) => {
   const { setHourStyle } = prop;
 
   const [state, dispatch] = useReducer(locationReducer, {
-    spinner: true,
+    isLoading: true,
     locationDetails: {},
     locationError: {},
   });
@@ -80,16 +80,19 @@ const WeatherCard = (prop) => {
                     ref={searchRef}
                     placeholder="Eg: India"
                     onSearch={onSearchHandler}
-                    disabled={state.spinner}
+                    disabled={state.isLoading}
                     enterButton
                   />
-                  <AddButton locationDetails={state.locationDetails} />
+                  <AddButton
+                    isLoading={state.isLoading}
+                    locationDetails={state.locationDetails}
+                  />
                 </Flex>
                 {state.locationError.message ? (
                   <>
                     <ErrorComponent />
                   </>
-                ) : state.spinner ? (
+                ) : state.isLoading ? (
                   <Spin
                     className="spin"
                     indicator={<LoadingOutlined spin />}

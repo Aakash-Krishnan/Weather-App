@@ -5,21 +5,26 @@ import WeatherCard from "./Components/WeatherCard";
 
 import { Flex, Typography } from "antd";
 import WeatherCollections from "./Components/WeatherCollections";
+import { useWeatherCollection } from "./utils/useWeatherCollection";
 
 function App() {
   const [hourStyle, setHourStyle] = useState("day");
+  const { weatherCollection } = useWeatherCollection();
 
   return (
     <Flex
-      // align="center"
-      justify="space-around"
+      justify={weatherCollection.length ? "space-around" : "center"}
       style={{ height: "100vh" }}
       className={hourStyle}
     >
-      <Flex vertical>
-        <h1 style={{ color: "white" }}>Collections</h1>
-        <WeatherCollections />
-      </Flex>
+      {weatherCollection.length > 0 && (
+        <Flex vertical justify="normal" className="collections-container">
+          <h1 className="collections-header">Favorite locations</h1>
+          <Flex className="collections.body" vertical justify="start">
+            <WeatherCollections />
+          </Flex>
+        </Flex>
+      )}
       <Flex vertical justify="center">
         <Typography.Title className="title" level={1}>
           Weather App
