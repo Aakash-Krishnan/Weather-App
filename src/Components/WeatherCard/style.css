@@ -2,6 +2,10 @@
   min-width: 520px;
 }
 
+.small-card {
+  width: 300px;
+}
+
 .card-details-container {
   padding: 32px;
   width: 100%;

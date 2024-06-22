@@ -1,3 +1,15 @@
+export async function getLocation(dispatch, search) {
+  try {
+    const res = await getLocationDetails(search);
+    if (res?.error) throw new Error(res.error.message);
+    dispatch({ type: "SUCCESS", payload: res });
+    return;
+  } catch (err) {
+    dispatch({ type: "ERROR", payload: err });
+    return;
+  }
+}
+
 export async function getLocationDetails(search = "") {
   let type;
   if (search !== "") {
@@ -17,7 +29,7 @@ export async function getLocationDetails(search = "") {
   }
 }
 
-const getLatAndLong = () => {
+function getLatAndLong() {
   return new Promise((res, rej) => {
     window.navigator.geolocation.getCurrentPosition(
       ({ coords }) => {
@@ -30,4 +42,4 @@ const getLatAndLong = () => {
       }
     );
   });
-};
+}

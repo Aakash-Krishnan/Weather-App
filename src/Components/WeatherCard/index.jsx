@@ -7,9 +7,10 @@ import { LoadingOutlined } from "@ant-design/icons";
 import ErrorComponent from "../ErrorComponent";
 import CardDetails from "../WeatherDetails";
 
-import { getLocationDetails } from "../../utils/getLocationDetails";
+import { getLocation } from "../../utils/getLocationDetails";
 import { getHour } from "../../utils/getHour";
-import { locationReducer } from "./locationReducer";
+import { locationReducer } from "../../utils/locationReducer";
+import AddButton from "../AddButton";
 
 const { Search } = Input;
 
@@ -49,16 +50,7 @@ const WeatherCard = (prop) => {
 
   useEffect(() => {
     dispatch({ type: "LOADING" });
-
-    (async () => {
-      try {
-        const res = await getLocationDetails(searchLocation);
-        if (res?.error) throw new Error(res.error.message);
-        dispatch({ type: "SUCCESS", payload: res });
-      } catch (err) {
-        dispatch({ type: "ERROR", payload: err });
-      }
-    })();
+    getLocation(dispatch, searchLocation);
 
     // return () => {};
   }, [searchLocation]);
@@ -80,17 +72,19 @@ const WeatherCard = (prop) => {
           >
             <Flex>
               <Flex className="card-details-container" vertical>
-                <Search
-                  allowClear
-                  value={searchInput}
-                  onChange={handleSearch}
-                  ref={searchRef}
-                  placeholder="Eg: India"
-                  onSearch={onSearchHandler}
-                  disabled={state.spinner}
-                  enterButton
-                />
-
+                <Flex gap={"10px"}>
+                  <Search
+                    allowClear
+                    value={searchInput}
+                    onChange={handleSearch}
+                    ref={searchRef}
+                    placeholder="Eg: India"
+                    onSearch={onSearchHandler}
+                    disabled={state.spinner}
+                    enterButton
+                  />
+                  <AddButton locationDetails={state.locationDetails} />
+                </Flex>
                 {state.locationError.message ? (
                   <>
                     <ErrorComponent />
