@@ -6,6 +6,7 @@ import { locationReducer } from "../../utils/locationReducer";
 import { getHour } from "../../utils/getHour";
 
 import { Collapse, Flex, Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const WeatherDropDown = (props) => {
   const { location } = props;
@@ -20,7 +21,17 @@ const WeatherDropDown = (props) => {
   const [item, setItem] = useState([]);
 
   const loadingSpinner = [
-    { key: "1", label: "Loading...", children: <Spin /> },
+    {
+      key: "1",
+      label: "Loading...",
+      children: (
+        <Spin
+          className="w-spin"
+          indicator={<LoadingOutlined spin />}
+          // size="large"
+        />
+      ),
+    },
   ];
 
   useEffect(() => {
