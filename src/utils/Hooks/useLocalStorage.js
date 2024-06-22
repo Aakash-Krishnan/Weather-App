@@ -1,3 +1,4 @@
+// In Progress...
 export function useLocalStorage(data) {
   if (data) {
     localStorage.set("weather", JSON.stringify(data));
