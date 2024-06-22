@@ -13,6 +13,10 @@
   height: 20px;
 }
 
+.w-name {
+  font-size: 10px;
+}
+
 .w-spin {
   display: flex;
   justify-content: center;

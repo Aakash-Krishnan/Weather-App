@@ -25,11 +25,7 @@ const WeatherDropDown = (props) => {
       key: "1",
       label: "Loading...",
       children: (
-        <Spin
-          className="w-spin"
-          indicator={<LoadingOutlined spin />}
-          // size="large"
-        />
+        <Spin className="w-spin" indicator={<LoadingOutlined spin />} />
       ),
     },
   ];
@@ -60,13 +56,16 @@ const WeatherDropDown = (props) => {
         key: id,
         label: (
           <Flex align="center" justify="space-between" gap={"10px"}>
-            <Flex align="center">
+            <Flex>
               <img
                 className="h-icon"
                 alt="avatar"
                 src={state.locationDetails.current.condition.icon}
               />
-              <h4>{state.locationDetails.location.country}</h4>
+              <Flex vertical>
+                <h4>{state.locationDetails.location.country}</h4>
+                <p className="w-name">{state.locationDetails.location.name}</p>
+              </Flex>
             </Flex>
 
             <p className="w-time">

@@ -1,8 +1,8 @@
-import { useWeatherCollection } from "../../utils/useWeatherCollection";
+import { useWeatherContext } from "../../utils/Hooks/useWeatherCollection";
 import WeatherDropDown from "../WeatherDropDown";
 
 const WeatherCollections = () => {
-  const { weatherCollection } = useWeatherCollection();
+  const { weatherCollection } = useWeatherContext();
   return (
     <>
       {weatherCollection &&

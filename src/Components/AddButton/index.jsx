@@ -1,4 +1,4 @@
-import { useWeatherCollection } from "../../utils/useWeatherCollection";
+import { useWeatherContext } from "../../utils/Hooks/useWeatherCollection";
 
 import { TinyColor } from "@ctrl/tinycolor";
 import { Button, ConfigProvider, Space } from "antd";
@@ -13,7 +13,7 @@ const getActiveColors = (colors) =>
 
 const AddButton = (props) => {
   const { locationDetails, isLoading } = props;
-  const { weatherCollection, setWeatherCollection } = useWeatherCollection();
+  const { weatherCollection, setWeatherCollection } = useWeatherContext();
 
   const handleClick = () => {
     const area = locationDetails.location.name;

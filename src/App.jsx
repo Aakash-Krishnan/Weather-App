@@ -5,11 +5,11 @@ import WeatherCard from "./Components/WeatherCard";
 
 import { Flex, Typography } from "antd";
 import WeatherCollections from "./Components/WeatherCollections";
-import { useWeatherCollection } from "./utils/useWeatherCollection";
+import { useWeatherContext } from "./utils/Hooks/useWeatherCollection";
 
 function App() {
   const [hourStyle, setHourStyle] = useState("day");
-  const { weatherCollection } = useWeatherCollection();
+  const { weatherCollection } = useWeatherContext();
 
   return (
     <Flex
