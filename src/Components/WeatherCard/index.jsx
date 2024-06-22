@@ -9,7 +9,7 @@ import CardDetails from "../WeatherDetails";
 
 import { getLocation } from "../../utils/getLocationDetails";
 import { getHour } from "../../utils/getHour";
-import { locationReducer } from "../../utils/locationReducer";
+import { locationReducer } from "../../utils/reducer/locationReducer";
 import AddButton from "../AddButton";
 
 const { Search } = Input;

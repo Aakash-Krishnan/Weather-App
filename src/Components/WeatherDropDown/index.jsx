@@ -2,7 +2,7 @@ import { memo, useEffect, useReducer, useState } from "react";
 import "./dropDown.css";
 
 import { getLocation } from "../../utils/getLocationDetails";
-import { locationReducer } from "../../utils/locationReducer";
+import { locationReducer } from "../../utils/reducer/locationReducer";
 import { getHour } from "../../utils/getHour";
 
 import { Collapse, Flex, Spin } from "antd";
