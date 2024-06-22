@@ -3,18 +3,18 @@ export function locationReducer(state, action) {
     case "LOADING":
       return {
         ...state,
-        spinner: true,
+        isLoading: true,
         locationError: {},
       };
     case "SUCCESS":
       return {
-        spinner: false,
+        isLoading: false,
         locationDetails: action.payload,
         locationError: {},
       };
     case "ERROR":
       return {
-        spinner: false,
+        isLoading: false,
         locationDetails: {},
         locationError: action.payload,
       };
