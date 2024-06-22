@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { memo, useEffect, useReducer, useState } from "react";
 import "./dropDown.css";
 
 import { getLocation } from "../../utils/getLocationDetails";
@@ -125,4 +125,5 @@ const WeatherDropDown = (props) => {
   );
 };
 
-export default WeatherDropDown;
+const WeatherCache = memo(WeatherDropDown);
+export default WeatherCache;
