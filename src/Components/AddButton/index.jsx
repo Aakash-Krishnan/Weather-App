@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { useWeatherContext } from "../../utils/Hooks/useWeatherCollection";
 
 import { TinyColor } from "@ctrl/tinycolor";
@@ -23,7 +23,6 @@ const AddButton = (props) => {
 
   useEffect(() => {
     const detectedOS = getOS();
-    console.log("detectedOS", detectedOS);
     setOS(detectedOS);
 
     const handleKeyDown = (e) => {
@@ -40,17 +39,17 @@ const AddButton = (props) => {
     };
   }, []);
 
-  const getOS = () => {
+  const getOS = useCallback(() => {
     const userAgent = window.navigator.userAgent;
     if (userAgent.indexOf("Win") !== -1) return "Windows";
     if (userAgent.indexOf("Mac") !== -1) return "Mac";
     if (userAgent.indexOf("Linux") !== -1) return "Linux";
     if (userAgent.indexOf("X11") !== -1) return "Unix";
     return "Unknown";
-  };
+  }, []);
 
   const handleClick = () => {
-    const area = locationDetails.location.name;
+    const area = locationDetails.location?.name;
 
     if (!weatherCollection.some((location) => location.area === area)) {
       setWeatherCollection((prev) => [...prev, { id: Date.now(), area }]);

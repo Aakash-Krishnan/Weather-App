@@ -1,7 +1,6 @@
 import { Flex } from "antd";
 
 const LabelContent = ({ state, hour }) => {
-  console.log("STATE", state);
   return (
     <Flex align="center" justify="space-between" gap={"10px"}>
       <Flex>
