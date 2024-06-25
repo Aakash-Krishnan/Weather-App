@@ -46,7 +46,7 @@ const WeatherCard = (prop) => {
     setHourStyle((prev) => (type ? type : prev));
 
     // return () => {};
-  }, [state.locationDetails, setHourStyle, state.locationError]);
+  }, [state.locationDetails, state.locationError]);
 
   useEffect(() => {
     dispatch({ type: "LOADING" });

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useWeatherContext } from "../../utils/Hooks/useWeatherCollection";
 
 import { TinyColor } from "@ctrl/tinycolor";
@@ -14,13 +14,21 @@ const getActiveColors = (colors) =>
 
 const AddButton = (props) => {
   const { locationDetails, isLoading } = props;
+
+  const [os, setOS] = useState("");
+
   const { weatherCollection, setWeatherCollection } = useWeatherContext();
 
   const addBtnRef = useRef(null);
 
   useEffect(() => {
+    const detectedOS = getOS();
+    console.log("detectedOS", detectedOS);
+    setOS(detectedOS);
+
     const handleKeyDown = (e) => {
-      if (e.shiftKey && e.key === "Enter") {
+      if ((e.altKey || e.metaKey) && e.key === "a") {
+        e.preventDefault();
         addBtnRef.current.click();
       }
     };
@@ -31,6 +39,15 @@ const AddButton = (props) => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+  const getOS = () => {
+    const userAgent = window.navigator.userAgent;
+    if (userAgent.indexOf("Win") !== -1) return "Windows";
+    if (userAgent.indexOf("Mac") !== -1) return "Mac";
+    if (userAgent.indexOf("Linux") !== -1) return "Linux";
+    if (userAgent.indexOf("X11") !== -1) return "Unix";
+    return "Unknown";
+  };
 
   const handleClick = () => {
     const area = locationDetails.location.name;
@@ -58,7 +75,7 @@ const AddButton = (props) => {
           },
         }}
       >
-        <Tooltip title="shift + enter" color="blue">
+        <Tooltip title={os === "Windows" ? "alt + a" : "cmd + a"} color="blue">
           <Button
             ref={addBtnRef}
             type="primary"

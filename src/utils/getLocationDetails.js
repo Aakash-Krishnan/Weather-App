@@ -1,11 +1,13 @@
+import { SUCCESS, ERROR } from "../constans";
+
 export async function getLocation(dispatch, search) {
   try {
     const res = await getLocationDetails(search);
     if (res?.error) throw new Error(res.error.message);
-    dispatch({ type: "SUCCESS", payload: res });
+    dispatch({ type: SUCCESS, payload: res });
     return;
   } catch (err) {
-    dispatch({ type: "ERROR", payload: err });
+    dispatch({ type: ERROR, payload: err });
     return;
   }
 }

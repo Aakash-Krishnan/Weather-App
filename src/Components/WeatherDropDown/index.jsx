@@ -4,9 +4,12 @@ import "./dropDown.css";
 import { getLocation } from "../../utils/getLocationDetails";
 import { locationReducer } from "../../utils/reducer/locationReducer";
 import { getHour } from "../../utils/getHour";
+import { LOADING } from "../../constans";
 
 import { Collapse, Flex, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import FavoritesDetails from "./FavoritesDetails";
+import LabelContent from "./LabelContent";
 
 const WeatherDropDown = (props) => {
   const { location } = props;
@@ -32,7 +35,7 @@ const WeatherDropDown = (props) => {
 
   useEffect(() => {
     const makeApiCall = () => {
-      dispatch({ type: "LOADING" });
+      dispatch({ type: LOADING });
       getLocation(dispatch, area);
     };
 
@@ -54,65 +57,14 @@ const WeatherDropDown = (props) => {
 
       const data = {
         key: id,
-        label: (
-          <Flex align="center" justify="space-between" gap={"10px"}>
-            <Flex>
-              <img
-                className="h-icon"
-                alt="avatar"
-                src={state.locationDetails.current.condition.icon}
-              />
-              <Flex vertical>
-                <h4>{state.locationDetails.location.country}</h4>
-                <p className="w-name">{state.locationDetails.location.name}</p>
-              </Flex>
-            </Flex>
-
-            <p className="w-time">
-              {hour % 12} {hour > 12 ? "PM" : "AM"}
-            </p>
-          </Flex>
-        ),
-        children: (
-          <Flex gap={24} className="w-detail" align="center">
-            <Flex gap="small" align="center">
-              <img
-                className="w-icon"
-                src="assets/humidity.png"
-                alt="humidity"
-              />
-              <p>
-                {state.locationDetails.current.humidity} g/m<sup>3</sup>
-              </p>
-            </Flex>
-
-            <Flex gap="small">
-              <p className="w-temp">
-                {state.locationDetails.current.temp_c}&deg;C
-              </p>
-            </Flex>
-
-            <Flex gap="middle" align="center">
-              <img
-                className="w-icon"
-                src="assets/wind-speed.png"
-                alt="wind-speed"
-              />
-              <p>{state.locationDetails.current.wind_kph} Km/hr</p>
-            </Flex>
-          </Flex>
-        ),
+        label: <LabelContent state={state} hour={hour} />,
+        children: <FavoritesDetails state={state} />,
       };
       setItem((prev) => [...prev, data]);
     }
 
     // return () => {};
-  }, [
-    id,
-    item.length,
-    state.locationDetails,
-    state.locationDetails.location?.name,
-  ]);
+  }, [item.length, state.locationDetails.location?.name]);
 
   return (
     <div>
