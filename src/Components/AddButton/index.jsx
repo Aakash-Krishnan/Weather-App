@@ -1,7 +1,8 @@
+import { useRef, useEffect } from "react";
 import { useWeatherContext } from "../../utils/Hooks/useWeatherCollection";
 
 import { TinyColor } from "@ctrl/tinycolor";
-import { Button, ConfigProvider, Space } from "antd";
+import { Button, ConfigProvider, Space, Tooltip } from "antd";
 
 const colors1 = ["#6253E1", "#04BEFE"];
 
@@ -14,6 +15,22 @@ const getActiveColors = (colors) =>
 const AddButton = (props) => {
   const { locationDetails, isLoading } = props;
   const { weatherCollection, setWeatherCollection } = useWeatherContext();
+
+  const addBtnRef = useRef(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.shiftKey && e.key === "Enter") {
+        addBtnRef.current.click();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   const handleClick = () => {
     const area = locationDetails.location.name;
@@ -41,16 +58,19 @@ const AddButton = (props) => {
           },
         }}
       >
-        <Button
-          type="primary"
-          size="medium"
-          disabled={
-            !isLoading && Object.keys(locationDetails).length ? false : true
-          }
-          onClick={handleClick}
-        >
-          Add
-        </Button>
+        <Tooltip title="shift + enter" color="blue">
+          <Button
+            ref={addBtnRef}
+            type="primary"
+            size="medium"
+            disabled={
+              !isLoading && Object.keys(locationDetails).length ? false : true
+            }
+            onClick={handleClick}
+          >
+            Add
+          </Button>
+        </Tooltip>
       </ConfigProvider>
     </Space>
   );

@@ -18,11 +18,15 @@ function App() {
       className={hourStyle}
     >
       {weatherCollection.length > 0 && (
-        <Flex vertical justify="normal" className="collections-container">
-          <h1 className="collections-header">Favorite locations</h1>
-          <Flex className="collections.body" vertical justify="start">
-            <WeatherCollections />
-          </Flex>
+        <Flex vertical>
+          <div className="favorite-container">
+            <h1 className="collections-header">Favorite locations</h1>
+            <Flex vertical justify="normal" className="collections-container">
+              <Flex className="collections.body" vertical justify="start">
+                <WeatherCollections />
+              </Flex>
+            </Flex>
+          </div>
         </Flex>
       )}
       <Flex vertical justify="center">

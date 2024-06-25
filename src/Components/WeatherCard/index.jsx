@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useRef, useReducer } from "react";
 import "./style.css";
 
-import { Card, Flex, Input, Spin, Col, Row } from "antd";
+import { Card, Flex, Input, Spin, Col, Row, Tooltip } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
 import ErrorComponent from "../ErrorComponent";
@@ -73,16 +73,18 @@ const WeatherCard = (prop) => {
             <Flex>
               <Flex className="card-details-container" vertical>
                 <Flex gap={"10px"}>
-                  <Search
-                    allowClear
-                    value={searchInput}
-                    onChange={handleSearch}
-                    ref={searchRef}
-                    placeholder="Eg: India"
-                    onSearch={onSearchHandler}
-                    disabled={state.isLoading}
-                    enterButton
-                  />
+                  <Tooltip title="enter" color="blue">
+                    <Search
+                      allowClear
+                      value={searchInput}
+                      onChange={handleSearch}
+                      ref={searchRef}
+                      placeholder="Eg: India"
+                      onSearch={onSearchHandler}
+                      disabled={state.isLoading}
+                      enterButton
+                    />
+                  </Tooltip>
                   <AddButton
                     isLoading={state.isLoading}
                     locationDetails={state.locationDetails}
