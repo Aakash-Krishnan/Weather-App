@@ -48,6 +48,7 @@ const AddButton = (props) => {
     return "Unknown";
   }, []);
 
+  // TODO: to wrap this fn with useCallback.
   const handleClick = () => {
     const area = locationDetails.location?.name;
 

@@ -22,7 +22,7 @@ function App() {
           <div className="favorite-container">
             <h1 className="collections-header">Favorite locations</h1>
             <Flex vertical justify="normal" className="collections-container">
-              <Flex className="collections.body" vertical justify="start">
+              <Flex className="collections-body" vertical justify="start">
                 <WeatherCollections />
               </Flex>
             </Flex>

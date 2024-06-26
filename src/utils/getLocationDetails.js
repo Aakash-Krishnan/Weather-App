@@ -24,8 +24,7 @@ export async function getLocationDetails(search = "") {
   const url = `https://api.weatherapi.com/v1/current.json?key=95f4d3f7b64944a3a6b143731240305&q=${type}&aqi=no`;
   try {
     const data = await fetch(url);
-    const res = await data.json();
-    return res;
+    return data.json();
   } catch (err) {
     return err;
   }

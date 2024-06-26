@@ -1,15 +1,15 @@
 import { memo, useEffect, useReducer, useState } from "react";
 import "./dropDown.css";
 
+import FavoritesDetails from "./FavoritesDetails";
+import LabelContent from "./LabelContent";
 import { getLocation } from "../../utils/getLocationDetails";
 import { locationReducer } from "../../utils/reducer/locationReducer";
 import { getHour } from "../../utils/getHour";
 import { LOADING } from "../../constans";
 
-import { Collapse, Flex, Spin } from "antd";
+import { Collapse, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import FavoritesDetails from "./FavoritesDetails";
-import LabelContent from "./LabelContent";
 
 const WeatherDropDown = (props) => {
   const { location } = props;
